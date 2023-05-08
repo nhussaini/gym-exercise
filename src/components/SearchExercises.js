@@ -15,9 +15,12 @@ const SearchExercises = () => {
         'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
         exerciseOptions
       );
+      // console.log('fetchedData->', bodyPartsData);
 
       setBodyParts(['all', ...bodyPartsData]);
     };
+
+    fetchExercisesData();
   }, []);
 
   const handleSearch = async () => {
@@ -79,7 +82,7 @@ const SearchExercises = () => {
         </Button>
       </Box>
       <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
-        <HorizontalScrollbar />
+        <HorizontalScrollbar data={bodyParts} />
       </Box>
     </Stack>
   );
