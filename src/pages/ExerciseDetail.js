@@ -11,7 +11,7 @@ const ExerciseDetail = () => {
   const [exerciseDetail, setExerciseDetail] = useState({});
   const [exerciseVideos, setExerciseVideos] = useState([]);
   const [targetMuscleExercises, setTargetMuscleExercises] = useState([]);
-  const [equipExercises, setEquipmentExercises] = useState([]);
+  const [equipmentExercises, setEquipmentExercises] = useState([]);
   const { id } = useParams();
 
   //fetch the detail for a specific exercise
@@ -39,7 +39,6 @@ const ExerciseDetail = () => {
         `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
         exerciseOptions
       );
-      // console.log('targetMuscleExercisesData', targetMuscleExercisesData);
       setTargetMuscleExercises(targetMuscleExercisesData);
 
       //fetch data for specific equipment
@@ -47,7 +46,6 @@ const ExerciseDetail = () => {
         `${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
         exerciseOptions
       );
-      console.log('equipmentExercisesData', equipmentExercisesData);
       setEquipmentExercises(equipmentExercisesData);
     };
 
@@ -60,7 +58,10 @@ const ExerciseDetail = () => {
         exerciseVideos={exerciseVideos}
         name={exerciseDetail.name}
       />
-      <SimilarExercises />
+      <SimilarExercises
+        targetMuscleExercises={targetMuscleExercises}
+        equipmentExercises={equipmentExercises}
+      />
     </Box>
   );
 };
