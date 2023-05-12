@@ -10,9 +10,10 @@ import SimilarExercises from '../components/SimilarExercises';
 const ExerciseDetail = () => {
   const [exerciseDetail, setExerciseDetail] = useState({});
   const [exerciseVideos, setExerciseVideos] = useState([]);
+  const [targetMuscleExercises, setTargetMuscleExercises] = useState([]);
+  const [equipExercises, setEquipmentExercises] = useState([]);
   const { id } = useParams();
-  // console.log('id=>', id);
-  // console.log('useParams-->', useParams().id);
+
   //fetch the detail for a specific exercise
   useEffect(() => {
     const fetchExercisesData = async () => {
@@ -32,6 +33,22 @@ const ExerciseDetail = () => {
         youtubeOptions
       );
       setExerciseVideos(exerciseVideosData.contents);
+
+      //fetch data for target muscle
+      const targetMuscleExercisesData = await fetchData(
+        `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
+        exerciseOptions
+      );
+      // console.log('targetMuscleExercisesData', targetMuscleExercisesData);
+      setTargetMuscleExercises(targetMuscleExercisesData);
+
+      //fetch data for specific equipment
+      const equipmentExercisesData = await fetchData(
+        `${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
+        exerciseOptions
+      );
+      console.log('equipmentExercisesData', equipmentExercisesData);
+      setEquipmentExercises(equipmentExercisesData);
     };
 
     fetchExercisesData();
